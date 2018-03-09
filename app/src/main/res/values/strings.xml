@@ -1,0 +1,16 @@
+<resources>
+    <!-- Title for the application. [CHAR LIMIT=12] -->
+    <string name="app_name">Toronto Tour Guide</string>
+
+    <!-- Category name for galleries [CHAR LIMIT=20] -->
+    <string name="galleries">Galleries</string>
+
+    <!-- Category name for museums [CHAR LIMIT=20] -->
+    <string name="museums">Museums</string>
+
+    <!-- Category name for restaurants [CHAR LIMIT=20] -->
+    <string name="restaurants">Restaurants</string>
+
+    <!-- Category name for events [CHAR LIMIT=20] -->
+    <string name="events">Events</string>
+</resources>
