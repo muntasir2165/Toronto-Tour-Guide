@@ -72,17 +72,4 @@ public class TouristAttractionCategoryAdapter extends FragmentPagerAdapter {
         return 4;
     }
 
-//    @Override
-//    public CharSequence getPageTitle(int position) {
-//        if (position == 0) {
-//            return mContext.getString(R.string.galleries);
-//        } else if (position == 1) {
-//            return mContext.getString(R.string.museums);
-//        } else if (position == 2) {
-//            return mContext.getString(R.string.restaurants);
-//        } else {
-////            tabLayout.getTabAt(i).setIcon();
-//            return mContext.getString(R.string.events);
-//        }
-//    }
 }
