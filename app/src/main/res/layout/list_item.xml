@@ -54,7 +54,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="16dp"
-            android:src="@drawable/ic_web_black_24dp" />
+            android:src="@drawable/ic_web_white_24dp" />
 
     </RelativeLayout>
 
