@@ -79,7 +79,7 @@ public class EventFragment extends Fragment {
             HttpHandler sh = new HttpHandler();
 
             //url to get the top trending tags
-            String url = "https://nowtoronto.com/api/search/location/museums/get_search_results";
+            String url = "https://nowtoronto.com/api/search/event/all/get_search_results";
 
             String jsonString = "";
             try {
@@ -103,8 +103,26 @@ public class EventFragment extends Fragment {
                         //get the JSONObject and its three attributes
                         JSONObject currentGalleryItem = results.getJSONObject(i);
                         String galleryName = currentGalleryItem.getString("title");
-                        String galleryLocation = currentGalleryItem.getString("lng");
-                        String galleryUrl = currentGalleryItem.getString("html");
+                        String html = currentGalleryItem.getString("html");
+
+                        //extract the url with more info about the event from the html string
+                        //System.out.println(html.indexOf("<a href=")); //62
+                        //find the index of the first occurrence of "<a href=\"" in the html string
+                        int url_href_start_index = html.indexOf("<a href=\"");
+                        //find the occurrence of the first of occurrence of "\">" right after "<a href=\"" in the html string
+                        int url_href_end_index = html.indexOf("\">", url_href_start_index);
+                        String galleryUrl = html.substring(url_href_start_index + "<a href=\"".length(), url_href_end_index);
+
+                        //extract the location of the event from the html string
+                        //find the index of the second occurrence of "<a href=\"" in the html string
+                       // int location_href_start_index = html.indexOf("<a href=\"", url_href_end_index);
+                        int location_mention_start_index = html.indexOf("/locations/", url_href_end_index);
+                        int location_href_start_index = html.indexOf("\">", location_mention_start_index);
+                        //find the occurrence of the second of occurrence of "\">" right after "<a href=\"" in the html string
+//                        int location_href_end_index = html.indexOf("\">", location_href_start_index);
+                        int location_href_end_index = html.indexOf("</a>", location_href_start_index);
+
+                        String galleryLocation = html.substring(location_href_start_index + "\">".length(), location_href_end_index);
 
                         //create a tag object with the parsed data
                         TouristAttraction gallery = new TouristAttraction(galleryName, galleryLocation, galleryUrl);

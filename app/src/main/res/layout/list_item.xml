@@ -28,8 +28,8 @@
 
         <TextView
             android:id="@+id/tourist_attraction_name_text_view"
-            android:layout_width="match_parent"
-            android:layout_height="44dp"
+            android:layout_width="wrap_content"
+            android:layout_height="58dp"
             android:layout_weight="1"
             android:gravity="bottom"
             android:textAppearance="?android:textAppearanceMedium"
@@ -39,12 +39,12 @@
 
         <TextView
             android:id="@+id/tourist_attraction_location_text_view"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="44dp"
             android:layout_below="@id/tourist_attraction_name_text_view"
             android:layout_weight="1"
             android:gravity="top"
-            android:textAppearance="?android:textAppearanceMedium"
+            android:textAppearance="?android:textAppearanceSmall"
             android:textColor="@android:color/white"
             tools:text="1134 Dupont, Toronto, Ontario M6H 2A2" />
 
