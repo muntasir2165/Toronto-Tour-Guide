@@ -38,14 +38,14 @@ import java.util.ArrayList;
  */
 public class MainActivity extends AppCompatActivity {
 
-    private String LOG_TAG = MainActivity.class.getSimpleName();
+    private static final String LOG_TAG = MainActivity.class.getSimpleName();
 
     //static variables that get populated with the tourist attraction site / event values after the
     //asynchronous web api calls to nowtoronto.com
-    private static ArrayList<TouristAttraction> galleries = new ArrayList<TouristAttraction>();
-    private static ArrayList<TouristAttraction> museums = new ArrayList<TouristAttraction>();
-    private static ArrayList<TouristAttraction> restaurants = new ArrayList<TouristAttraction>();
-    private static ArrayList<TouristAttraction> events = new ArrayList<TouristAttraction>();
+    private static ArrayList<TouristAttraction> galleryList = new ArrayList<TouristAttraction>();
+    private static ArrayList<TouristAttraction> museumList = new ArrayList<TouristAttraction>();
+    private static ArrayList<TouristAttraction> restaurantList = new ArrayList<TouristAttraction>();
+    private static ArrayList<TouristAttraction> eventList = new ArrayList<TouristAttraction>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,10 +74,10 @@ public class MainActivity extends AppCompatActivity {
         viewPager.setAdapter(adapter);
 
         /*make the asynchronous api calls to get data on all the tourist attractions where
-            0: code for galleries
-            1: code for museums
-            2: code for restaurants
-            3: code for events
+            0: code for galleriesList
+            1: code for museumsList
+            2: code for restaurantsList
+            3: code for eventsList
         */
         new GetTouristAttractionJSONData().execute(0);
         new GetTouristAttractionJSONData().execute(1);
@@ -92,43 +92,49 @@ public class MainActivity extends AppCompatActivity {
 
         GetTouristAttraction() {}
 
-        static ArrayList<TouristAttraction> getGalleries() {
-            return galleries;
+        static ArrayList<TouristAttraction> getGalleryListing() {
+            return galleryList;
         }
-        static ArrayList<TouristAttraction> getMuseums() {
-            return museums;
+        static ArrayList<TouristAttraction> getMuseumListing() {
+            return museumList;
         }
-        static ArrayList<TouristAttraction> getRestaurants() {
-            return restaurants;
+        static ArrayList<TouristAttraction> getRestaurantListing() {
+            return restaurantList;
         }
-        static ArrayList<TouristAttraction> getEvents() {
-            return events;
+        static ArrayList<TouristAttraction> getEventListing() {
+            return eventList;
         }
     }
 
-    /* A static inner class that executes the asynchronous web api calls, parses the data and
+    /* A private inner class that executes the asynchronous web api calls, parses the data and
        populates the corresponding static variables
     */
     private class GetTouristAttractionJSONData extends AsyncTask<Integer, Void, Void> {
 
         @Override
         protected Void doInBackground(Integer... arg0) {
-            ArrayList<TouristAttraction> result = new ArrayList<TouristAttraction>();
+            ArrayList<TouristAttraction> resultList = new ArrayList<TouristAttraction>();
             HttpHandler sh = new HttpHandler();
             String url = "";
 
             if (arg0[0] == 0) {
                 url = "https://nowtoronto.com/api/search/location/galleries/get_search_results";
-                galleries = result;
+                galleryList = resultList;
             } else if (arg0[0] == 1) {
                 url = "https://nowtoronto.com/api/search/location/museums/get_search_results";
-                museums = result;
+                museumList = resultList;
             } else if (arg0[0] == 2) {
                 url = "https://nowtoronto.com/api/search/location/restaurants/get_search_results";
-                restaurants = result;
+                restaurantList = resultList;
             } else {
                 url = "https://nowtoronto.com/api/search/event/all/get_search_results";
-                events = result;
+                eventList = resultList;
+            }
+
+            //if ALL the TouristAttraction variables are already populated, then no more web API
+            //calls will be required/made for the current session of the running app
+            if (galleryList.size() != 0 && museumList.size() != 0 && restaurantList.size() != 0 && eventList.size() != 0) {
+                return null;
             }
 
             String jsonString = "";
@@ -192,15 +198,15 @@ public class MainActivity extends AppCompatActivity {
                         TouristAttraction touristAttraction = new TouristAttraction(galleryName, currentTouristAttractionLocation, currentTouristAttractionUrl);
 
                         // adding a tourist attraction to our result ArrayList of TouristAttractions
-                        result.add(touristAttraction);
+                        resultList.add(touristAttraction);
                     }
                 } catch (final JSONException e) {
-                    Log.e(LOG_TAG, "Json parsing error: " + e.getMessage());
+                    Log.e(LOG_TAG, getString(R.string.json_parsing_error) + e.getMessage());
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             Toast.makeText(getApplicationContext(),
-                                    "Json parsing error: " + e.getMessage(),
+                                    getString(R.string.json_parsing_error) + e.getMessage(),
                                     Toast.LENGTH_LONG).show();
                         }
                     });
@@ -208,12 +214,12 @@ public class MainActivity extends AppCompatActivity {
                 }
 
             } else {
-                Log.e(LOG_TAG, "Couldn't get json from server.");
+                Log.e(LOG_TAG, getString(R.string.json_server_error));
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         Toast.makeText(getApplicationContext(),
-                                "Couldn't get json from server.",
+                                getString(R.string.json_server_error),
                                 Toast.LENGTH_LONG).show();
                     }
                 });

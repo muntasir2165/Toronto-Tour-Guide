@@ -13,4 +13,8 @@
 
     <!-- Category name for events [CHAR LIMIT=20] -->
     <string name="events">Events</string>
+
+    <string name="json_parsing_error">Json parsing error:</string>
+    <string name="json_server_error">Could not get json from server.</string>
+
 </resources>

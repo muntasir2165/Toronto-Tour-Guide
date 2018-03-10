@@ -30,13 +30,13 @@ public class EventFragment extends Fragment {
         rootView = inflater.inflate(R.layout.tourist_attraction_list, container, false);
 
         // Get a list of events from the MainActivity and set it to the events variable when we
-        // receive some data from the MainActivity.GetTouristAttraction.getEvents() method
-        while (MainActivity.GetTouristAttraction.getEvents().size() == 0) {}
-        final ArrayList<TouristAttraction> events = MainActivity.GetTouristAttraction.getEvents();
+        // receive some data from the MainActivity.GetTouristAttraction.getEventListing() method
+        while (MainActivity.GetTouristAttraction.getEventListing().size() == 0) {}
+        final ArrayList<TouristAttraction> eventList = MainActivity.GetTouristAttraction.getEventListing();
 
         // Create an {@link TouristAttractionAdapter}, whose data source is a list of {@link TouristAttraction}s. The
         // adapter knows how to create list items for each item in the list.
-        TouristAttractionAdapter adapter = new TouristAttractionAdapter(getActivity(), events, R.color.event_listing);
+        TouristAttractionAdapter adapter = new TouristAttractionAdapter(getActivity(), eventList, R.color.event_listing);
 
         // Find the {@link ListView} object in the view hierarchy of the {@link Activity}.
         // There should be a {@link ListView} with the view ID called list, which is declared in the
@@ -52,14 +52,14 @@ public class EventFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 // Get the {@link TouristAttraction} object at the given position the user clicked on
-                TouristAttraction touristAttraction = events.get(position);
+                TouristAttraction touristAttraction = eventList.get(position);
                 String touristAttractionInfoUrl = touristAttraction.getUrl();
                 // Create a new intent to view the tourist attraction info URI
-                Intent openWebPage = new Intent(Intent.ACTION_VIEW);
-                // Convert the String URL into a URI object (to set data on the Intent openWebPage)
-                openWebPage.setData(Uri.parse(touristAttractionInfoUrl));
+                Intent openWebPageIntent = new Intent(Intent.ACTION_VIEW);
+                // Convert the String URL into a URI object (to set data on the Intent openWebPageIntent)
+                openWebPageIntent.setData(Uri.parse(touristAttractionInfoUrl));
                 // Send the intent to launch a new activity
-                startActivity(openWebPage);
+                startActivity(openWebPageIntent);
             }
         });
 
