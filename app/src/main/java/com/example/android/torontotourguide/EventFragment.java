@@ -29,7 +29,9 @@ public class EventFragment extends Fragment {
                              Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.tourist_attraction_list, container, false);
 
-        // Get a list of events from the MainActivity
+        // Get a list of events from the MainActivity and set it to the events variable when we
+        // receive some data from the MainActivity.GetTouristAttraction.getEvents() method
+        while (MainActivity.GetTouristAttraction.getEvents().size() == 0) {}
         final ArrayList<TouristAttraction> events = MainActivity.GetTouristAttraction.getEvents();
 
         // Create an {@link TouristAttractionAdapter}, whose data source is a list of {@link TouristAttraction}s. The

@@ -29,7 +29,9 @@ public class RestaurantFragment extends Fragment {
                              Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.tourist_attraction_list, container, false);
 
-        // Get a list of restaurants from the MainActivity
+        // Get a list of restaurants from the MainActivity and set it to the restaurants variable
+        // when we receive some data from the MainActivity.GetTouristAttraction.getRestaurants() method
+        while (MainActivity.GetTouristAttraction.getRestaurants().size() == 0) {}
         final ArrayList<TouristAttraction> restaurants = MainActivity.GetTouristAttraction.getRestaurants();
 
         // Create an {@link TouristAttractionAdapter}, whose data source is a list of {@link TouristAttraction}s. The

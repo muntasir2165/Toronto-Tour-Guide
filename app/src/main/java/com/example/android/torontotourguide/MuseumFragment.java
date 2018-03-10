@@ -29,7 +29,9 @@ public class MuseumFragment extends Fragment {
                              Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.tourist_attraction_list, container, false);
 
-        // Get a list of museums from the MainActivity
+        // Get a list of museums from the MainActivity and set it to the museums variable when we
+        // receive some data from the MainActivity.GetTouristAttraction.getMuseums() method
+        while (MainActivity.GetTouristAttraction.getMuseums().size() == 0) {}
         final ArrayList<TouristAttraction> museums = MainActivity.GetTouristAttraction.getMuseums();
 
         // Create an {@link TouristAttractionAdapter}, whose data source is a list of {@link TouristAttraction}s. The

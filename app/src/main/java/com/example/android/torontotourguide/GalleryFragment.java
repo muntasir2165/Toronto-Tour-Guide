@@ -29,7 +29,9 @@ public class GalleryFragment extends Fragment {
                              Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.tourist_attraction_list, container, false);
 
-        // Get a list of galleries from the MainActivity
+        // Get a list of galleries from the MainActivity and set it to the galleries variable when
+        // we receive some data from the MainActivity.GetTouristAttraction.getGalleries() method
+        while (MainActivity.GetTouristAttraction.getGalleries().size() == 0) {}
         final ArrayList<TouristAttraction> galleries = MainActivity.GetTouristAttraction.getGalleries();
 
         // Create an {@link TouristAttractionAdapter}, whose data source is a list of {@link TouristAttraction}s. The
