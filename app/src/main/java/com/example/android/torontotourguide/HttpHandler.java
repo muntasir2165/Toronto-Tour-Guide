@@ -48,7 +48,7 @@ public class HttpHandler {
             jsonResponse = convertStreamToString(inputStream);
         } catch (IOException e) {
             //handle the exception
-            Log.e(HttpHandler.class.getSimpleName(), "Problem retrieving the Tourist Attraction results.", e);
+            Log.e(HttpHandler.class.getSimpleName(), "Problem retrieving the tourist attraction results.", e);
         } finally {
             if (urlConnection != null) {
                 urlConnection.disconnect();

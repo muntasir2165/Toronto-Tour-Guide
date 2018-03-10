@@ -23,7 +23,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 /**
  * {@link TouristAttractionCategoryAdapter} is a {@link FragmentPagerAdapter} that can provide the layout for
- * each list item based on a data source which is a list of {@link TouristAttraction} objects.
+ * each listing based on a data source which is a list of {@link TouristAttraction} objects.
  */
 public class TouristAttractionCategoryAdapter extends FragmentPagerAdapter {
 

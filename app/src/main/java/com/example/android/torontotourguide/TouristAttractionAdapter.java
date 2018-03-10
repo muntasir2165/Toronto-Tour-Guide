@@ -77,7 +77,7 @@ public class TouristAttractionAdapter extends ArrayAdapter<TouristAttraction>  {
         // Set the background color of the text container View
         textContainer.setBackgroundColor(color);
 
-        // Return the whole list item layout (containing 2 TextViews) so that it can be shown in
+        // Return the whole list item layout (containing 2 TextViews and 1 ImageView) so that it can be shown in
         // the ListView.
         return listItemView;
     }

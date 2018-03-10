@@ -20,6 +20,6 @@
     <!-- Background color for the restaurant listing -->
     <color name="restaurant_listing">#8800A0</color>
 
-    <!-- Background color for the phrases category -->
+    <!-- Background color for the events listing -->
     <color name="event_listing">#16AFCA</color>
 </resources>

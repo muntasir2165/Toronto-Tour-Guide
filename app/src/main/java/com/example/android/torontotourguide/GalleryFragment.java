@@ -14,7 +14,7 @@ import android.widget.ListView;
 import java.util.ArrayList;
 
 /**
- * A simple {@link Fragment} subclass.
+ * {@link Fragment} that displays a list of galleries.
  */
 public class GalleryFragment extends Fragment {
 
@@ -29,7 +29,7 @@ public class GalleryFragment extends Fragment {
                              Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.tourist_attraction_list, container, false);
 
-        // Get a list of galleries from
+        // Get a list of galleries from the MainActivity
         final ArrayList<TouristAttraction> galleries = MainActivity.GetTouristAttraction.getGalleries();
 
         // Create an {@link TouristAttractionAdapter}, whose data source is a list of {@link TouristAttraction}s. The
@@ -49,13 +49,13 @@ public class GalleryFragment extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                // Get the {@link Tag} object at the given position the user clicked on
+                // Get the {@link TouristAttraction} object at the given position the user clicked on
                 TouristAttraction touristAttraction = galleries.get(position);
-                String tagUrl = touristAttraction.getUrl();
-                // Create a new intent to view the tag URI
+                String touristAttractionInfoUrl = touristAttraction.getUrl();
+                // Create a new intent to view the tourist attraction info URI
                 Intent openWebPage = new Intent(Intent.ACTION_VIEW);
                 // Convert the String URL into a URI object (to set data on the Intent openWebPage)
-                openWebPage.setData(Uri.parse(tagUrl));
+                openWebPage.setData(Uri.parse(touristAttractionInfoUrl));
                 // Send the intent to launch a new activity
                 startActivity(openWebPage);
             }
